@@ -1,0 +1,7 @@
+{
+    "extends": "google",
+    "rules": {
+        "no-undef": 1,
+        "no-console": 0
+    }
+}

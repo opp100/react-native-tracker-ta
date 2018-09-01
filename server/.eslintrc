@@ -1,7 +1,9 @@
 {
     "extends": "google",
+    "parser": "babel-eslint",
     "rules": {
         "no-undef": 1,
-        "no-console": 0
+        "no-console": 0,
+        "switch-colon-spacing": 0
     }
 }

@@ -8,7 +8,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "reinstall": "rimraf node_modules && rm -f package-lock.json && rm -f yarn.lock && npm install",
         "docker-build": "docker build . -t tracker-server",
-        "docker-run": "docker run --rm -it -p 8080:8080 -v ${PWD}:/usr/src/app tacker-server:latest"
+        "docker-run": "docker run --rm -it -p 8080:8080 -v ${PWD}:/usr/src/app tracker-server:latest"
     },
     "author": "",
     "license": "ISC",
@@ -16,6 +16,7 @@
         "express": "^4.16.3"
     },
     "devDependencies": {
+        "babel-eslint": "^9.0.0",
         "eslint": "^5.5.0",
         "eslint-config-google": "^0.9.1"
     }

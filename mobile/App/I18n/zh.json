@@ -1,0 +1,41 @@
+{
+    "id": "中文",
+    "appName": "React Native 模板",
+    "welcome": "欢迎",
+    "settings": {
+        "title": "设置",
+        "language": "请选择语言:",
+        "height": "高度:",
+        "width": "宽度:"
+    },
+    "navigator": {
+        "ScreenA": "屏幕A",
+        "Settings": "设置"
+    },
+    "buttons": {
+        "Cancel": "取消",
+        "Confirm": "确定",
+        "Select": "选择",
+        "Submit": "提交",
+        "Yes": "好",
+        "OK": "好",
+        "No": "不",
+        "ShowToast": "显示弹出",
+        "ChangeTheme": "更改主题",
+        "AddToScreenA": "添加至屏幕A",
+        "DeleteAllBadge": "删除所有徽章",
+        "AddToSettings": "添加至设定",
+        "ShowAlertDialog": "显示弹出窗口",
+        "ShowSinglePicker": "显示单选选框",
+        "ShowHeaderMessage": "显示标题信息"
+    },
+    "alerts": {
+        "DefaultMessage": "默认信息"
+    },
+    "toast": {
+        "welcome": "欢迎"
+    },
+    "header_message": {
+        "DefaultMessage": "默认信息"
+    }
+}

@@ -1,0 +1,82 @@
+PODS:
+  - React (0.56.0):
+    - React/Core (= 0.56.0)
+  - react-native-spinkit (1.0.2):
+    - React
+  - React/Core (0.56.0):
+    - yoga (= 0.56.0.React)
+  - React/DevSupport (0.56.0):
+    - React/Core
+    - React/RCTWebSocket
+  - React/fishhook (0.56.0)
+  - React/RCTActionSheet (0.56.0):
+    - React/Core
+  - React/RCTAnimation (0.56.0):
+    - React/Core
+  - React/RCTBlob (0.56.0):
+    - React/Core
+  - React/RCTGeolocation (0.56.0):
+    - React/Core
+  - React/RCTImage (0.56.0):
+    - React/Core
+    - React/RCTNetwork
+  - React/RCTLinkingIOS (0.56.0):
+    - React/Core
+  - React/RCTNetwork (0.56.0):
+    - React/Core
+  - React/RCTSettings (0.56.0):
+    - React/Core
+  - React/RCTText (0.56.0):
+    - React/Core
+  - React/RCTVibration (0.56.0):
+    - React/Core
+  - React/RCTWebSocket (0.56.0):
+    - React/Core
+    - React/fishhook
+    - React/RCTBlob
+  - RNI18n (2.0.15):
+    - React
+  - RNSVG (6.5.2):
+    - React
+  - yoga (0.56.0.React)
+
+DEPENDENCIES:
+  - react-native-spinkit (from `../node_modules/react-native-spinkit`)
+  - React/Core (from `../node_modules/react-native`)
+  - React/DevSupport (from `../node_modules/react-native`)
+  - React/RCTActionSheet (from `../node_modules/react-native`)
+  - React/RCTAnimation (from `../node_modules/react-native`)
+  - React/RCTGeolocation (from `../node_modules/react-native`)
+  - React/RCTImage (from `../node_modules/react-native`)
+  - React/RCTLinkingIOS (from `../node_modules/react-native`)
+  - React/RCTNetwork (from `../node_modules/react-native`)
+  - React/RCTSettings (from `../node_modules/react-native`)
+  - React/RCTText (from `../node_modules/react-native`)
+  - React/RCTVibration (from `../node_modules/react-native`)
+  - React/RCTWebSocket (from `../node_modules/react-native`)
+  - RNI18n (from `../node_modules/react-native-i18n`)
+  - RNSVG (from `../node_modules/react-native-svg`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
+
+EXTERNAL SOURCES:
+  React:
+    :path: ../node_modules/react-native
+  react-native-spinkit:
+    :path: ../node_modules/react-native-spinkit
+  RNI18n:
+    :path: ../node_modules/react-native-i18n
+  RNSVG:
+    :path: ../node_modules/react-native-svg
+  yoga:
+    :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
+
+SPEC CHECKSUMS:
+  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-spinkit: c9f5826e1a0bf0da889b3795278eb96ae15c1350
+  RNI18n: 46b8694063fbd699f2c06a4dc8e835b3176763b1
+  RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
+  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
+
+PODFILE CHECKSUM: b9c068e98ef3d7e9c1c3ed5aab598de227f9e88c
+
+COCOAPODS: 1.4.0

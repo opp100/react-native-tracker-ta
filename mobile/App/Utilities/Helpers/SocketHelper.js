@@ -7,12 +7,16 @@ const INIT_CLIENT_ID = 'init_client_id';
 const GENERAL_MESSAGE = 'general_message';
 
 class SocketHelper {
+    _connected = false;
+    reconnectInterval;
     init(clientId = null) {
         this.ws = new WebSocket('ws://192.168.0.114:8080', '', {
             headers: {token: '111111'}
         });
 
         this.ws.onopen = () => {
+            if (this.reconnectInterval) clearInterval(this.reconnectInterval);
+            // send header
             store.dispatch(PopupActions.showHeaderMessage('Connect Success!', 1000, 'success'));
             // connection opened
             this.register(clientId);
@@ -34,6 +38,7 @@ class SocketHelper {
 
         this.ws.onclose = (e) => {
             // connection closed
+            this.reconnect();
             console.warn(e.code, e.reason);
         };
     }
@@ -44,6 +49,14 @@ class SocketHelper {
             return;
         }
         this.send({client_id: clientId, type: 'register'});
+    }
+
+    reconnect() {
+        this.reconnectInterval = setInterval(() => {
+            console.warn('reconnecting...');
+            this.ws.removeEventListener();
+            this.init();
+        }, 5000);
     }
 
     send(msg) {

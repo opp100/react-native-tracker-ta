@@ -33,27 +33,10 @@ const wss = new WebSocket.Server({
 
 let lookup: WebSocket[] = [];
 wss.on('connection', (ws: WebSocket) => {
-    //connection is up, let's add a simple simple event
     ws.on('message', (message: string) => {
-        let msgObj = Messenger.extractMsg(message);
-        console.warn(msgObj);
-        if (!msgObj) {
-            return;
-        }
-
-        if (msgObj.type == 'register') {
-            let _id;
-            _id = Messenger.register(msgObj.client_id);
-            lookup[_id] = ws;
-            lookup[_id].send(Messenger.responseId(_id.toString()));
-        }
-        if (msgObj.type == 'general') {
-            let _id = msgObj.target;
-            lookup[_id].send(Messenger.generalMessage(msgObj.message));
-        }
+        const messenger = new Messenger(lookup, ws);
+        messenger.send(message);
     });
-
-    //send immediatly a feedback to the incoming connection
 });
 
 //start our server

@@ -5,7 +5,7 @@ import './I18n';
 import {AppWithNavigationState, middleware} from './Navigator/AppNavigator';
 import {appReducer} from './Reducers';
 import {RootView} from './UIWidgets';
-const store = createStore(appReducer, applyMiddleware(middleware));
+export const store = createStore(appReducer, applyMiddleware(middleware));
 
 class Root extends React.Component {
     render() {

@@ -5,16 +5,16 @@
  */
 
 import * as React from 'react';
-import Constraints from './Constraints';
+import * as _Constraints from './Constraints';
 export interface IMyStyleSheet {
     Dimensions?: Object;
     get(theme: String): Object;
-    getThemeColor(theme: String): Constraints.IColors;
+    getThemeColor(theme: String): _Constraints.IColors;
     getAdjustHeight(number: Number): Object;
 }
 export declare const MyStyleSheet: IMyStyleSheet;
 
-class Options {
+declare class Options {
     locale: 'zh' | 'en';
 }
 export interface II18n {
@@ -31,7 +31,7 @@ export class BaseComponent<P = {}, S = {}, SS = any> extends React.Component<P, 
 }
 
 export interface IConstraints {
-    Themes?: Constraints.ITheme;
+    Themes?: _Constraints.ITheme;
 }
 
 export declare const Constraints: IConstraints;

@@ -13,5 +13,6 @@ export const appReducer = combineReducers({
     nav: navReducer,
     settings: require('./Settings').reducer,
     popups: require('./Popups').reducer,
-    badge: require('./Badge').reducer
+    badge: require('./Badge').reducer,
+    socket: require('./Socket').reducer
 });

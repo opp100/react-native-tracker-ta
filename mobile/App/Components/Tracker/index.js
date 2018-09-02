@@ -6,7 +6,7 @@
 
 import React from 'react';
 import {Text, View, SafeAreaView, ScrollView} from 'react-native';
-import {MyStyleSheet, BaseComponent, DeviceHelper} from '../../Utilities';
+import {MyStyleSheet, BaseComponent, SocketHelper} from '../../Utilities';
 import {connect} from 'react-redux';
 import {Button, FontAwesome, Badge} from '../../UIWidgets';
 import PopupActions from '../../Reducers/Popups';
@@ -35,23 +35,25 @@ class Tracker extends BaseComponent {
 
     async componentDidMount() {
         super.componentDidMount();
-        DeviceHelper.initSocket();
+        this.initSocket();
     }
 
-    _onInputDialogPress() {
-        this.refs['InputDialog'].getWrappedInstance().show();
+    initSocket() {
+        let sh = new SocketHelper();
+        const {clientId} = this.props;
+        sh.init(clientId);
     }
 
     render() {
-        const {language, theme} = this.props;
+        const {language, theme, clientId} = this.props;
         const styles = MyStyleSheet.get(theme);
         const themeColor = MyStyleSheet.getThemeColor(theme);
         return (
             <View style={styles.flexBox}>
                 <SafeAreaView style={styles.container}>
-                    <ScrollView />
-                    <SinglePicker ref={'SinglePicker'} cancelable />
-                    <InputDialog ref={'InputDialog'} cancelable />
+                    <ScrollView>
+                        <Text>Your Client Id: {clientId}</Text>
+                    </ScrollView>
                 </SafeAreaView>
             </View>
         );
@@ -61,18 +63,12 @@ class Tracker extends BaseComponent {
 const mapStateToProps = (state) => {
     return {
         language: state.settings.language,
-        theme: state.settings.theme
+        theme: state.settings.theme,
+        clientId: state.socket.clientId
     };
 };
 
-const mapStateToDispatch = (dispatch) => ({
-    showToast: (message) => dispatch(PopupActions.showToast(message)),
-    showAlert: (message, onPress) => dispatch(PopupActions.showAlert(message, onPress)),
-    showHeaderMessage: (message, duration, backgroundType) =>
-        dispatch(PopupActions.showHeaderMessage(message, duration, backgroundType)),
-    updateBadgeLabel: (label, key) => dispatch(BadgeActions.updateLabel(label, key)),
-    deleteAllBadgeLabel: (label, key) => dispatch(BadgeActions.deleteAllLabel(label, key))
-});
+const mapStateToDispatch = (dispatch) => ({});
 
 export default connect(
     mapStateToProps,

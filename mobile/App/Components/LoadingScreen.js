@@ -13,6 +13,7 @@ import {MyStyleSheet, BaseComponent} from '../Utilities';
 import Spinner from 'react-native-spinkit';
 
 import SettingsActions from '../Reducers/Settings';
+import SocketActions from '../Reducers/Socket';
 import NavigationHelper from '../Utilities/Helpers/NavigationHelper';
 
 class LoadingScreen extends BaseComponent {
@@ -26,14 +27,17 @@ class LoadingScreen extends BaseComponent {
     }
 
     initApp() {
-        setTimeout(() => {
-            const {changeLanguage} = this.props;
-            CacheStore.get('SETTINGS_LANGUAGE').then((language) => {
-                if (language) {
-                    changeLanguage(language);
-                }
-                NavigationHelper.resetTo(this, 'TabNavigator');
-            });
+        setTimeout(async () => {
+            const {changeLanguage, storeClientId} = this.props;
+            // load values
+            const language = await CacheStore.get('SETTINGS_LANGUAGE');
+            const clientId = await CacheStore.get('SOCKET_CLIENT_ID');
+
+            // set value to redux state
+            if (language) changeLanguage(language);
+            if (clientId) storeClientId(clientId);
+
+            NavigationHelper.resetTo(this, 'TabNavigator');
         }, 500);
     }
 
@@ -64,7 +68,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapStateToDispatch = (dispatch) => ({
-    changeLanguage: (newLang) => dispatch(SettingsActions.changeLanguage(newLang))
+    changeLanguage: (newLang) => dispatch(SettingsActions.changeLanguage(newLang)),
+    storeClientId: (id) => dispatch(SocketActions.storeClientId(id))
 });
 
 export default connect(

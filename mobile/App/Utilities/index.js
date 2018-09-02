@@ -9,11 +9,13 @@ import BaseComponent from './BaseComponent';
 import Constraints from './Constraints';
 import I18n from './Helpers/I18nHelper';
 import DeviceHelper from './Helpers/DeviceHelper';
+import SocketHelper from './Helpers/SocketHelper';
 
 module.exports = {
     MyStyleSheet: MyStyleSheet,
     Constraints: Constraints,
     BaseComponent: BaseComponent,
     I18n: I18n,
-    DeviceHelper: DeviceHelper
+    DeviceHelper: DeviceHelper,
+    SocketHelper: SocketHelper
 };

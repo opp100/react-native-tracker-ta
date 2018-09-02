@@ -9,6 +9,7 @@
     "rules": {
         "no-undef": 1,
         "no-console": 0,
-        "switch-colon-spacing": 0
+        "switch-colon-spacing": 0,
+        "require-jsdoc": 0
     }
 }

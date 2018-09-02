@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as http from 'http';
 import * as WebSocket from 'ws';
-import * as _ from 'lodash';
+import Messenger from './Messenger';
 const app = express();
 app.get('/', (req, res) => {
     res.send('Hello world!\n');
@@ -17,7 +17,6 @@ const wss = new WebSocket.Server({
         const token = info.req.headers.token;
         if (!token) cb(false, 401, 'Unauthorized');
         else {
-            console.warn(token);
             //TODO: jwt token verify
             cb(true);
             // jwt.verify(token, 'secret-key', function(err, decoded) {
@@ -34,20 +33,24 @@ const wss = new WebSocket.Server({
 
 let lookup: WebSocket[] = [];
 wss.on('connection', (ws: WebSocket) => {
-    const _id = _.random(100000, 999999);
-    lookup[_id] = ws;
     //connection is up, let's add a simple simple event
     ws.on('message', (message: string) => {
-        //log the received message and send it back to the client
-        ws.send(`Hello, you sent -> ${message}`);
+        let msgObj = Messenger.extractMsg(message);
+        console.warn(msgObj);
+        if (!msgObj) {
+            return;
+        }
+        
+        if (msgObj.type == 'register') {
+            let _id;
+            _id = Messenger.register(msgObj.client_id);
+            console.warn(_id);
+            lookup[_id] = ws;
+            lookup[_id].send(Messenger.responseId(_id.toString()));
+        }
     });
 
     //send immediatly a feedback to the incoming connection
-    const response = {
-        message: `Your id ${_id}`,
-        client_id: _id
-    };
-    lookup[_id].send(JSON.stringify(response));
 });
 
 //start our server

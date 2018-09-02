@@ -10,7 +10,8 @@
     },
     "navigator": {
         "ScreenA": "Screen A",
-        "Settings": "Settings"
+        "Settings": "Settings",
+        "Tracker": "Tracker"
     },
     "buttons": {
         "Cancel": "Cancel",

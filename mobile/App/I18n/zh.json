@@ -10,7 +10,8 @@
     },
     "navigator": {
         "ScreenA": "屏幕A",
-        "Settings": "设置"
+        "Settings": "设置",
+        "Tracker": "定位"
     },
     "buttons": {
         "Cancel": "取消",

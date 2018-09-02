@@ -13,28 +13,13 @@ import HeaderTitle from './HeaderTitle';
 import HeaderLeft from './HeaderLeft';
 import Header from './Header';
 import LoadingScreen from '../Components/LoadingScreen';
-import ScreenA from '../Components/ScreenA';
+import Tracker from '../Components/Tracker';
 import Settings from '../Components/Settings';
-/*
-const Drawer = DrawerNavigator(
-    {
-        ScreenA: {
-            screen: ScreenA
-        },
-        Settings: {
-            screen: Settings
-        }
-    },
-    {
-        contentComponent: DrawerComponent
-    }
-);
-*/
 
 const _TabNavigator = createBottomTabNavigator(
     {
-        ScreenA: {
-            screen: ScreenA
+        Tracker: {
+            screen: Tracker
         },
         Settings: {
             screen: Settings

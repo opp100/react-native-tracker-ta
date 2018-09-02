@@ -8,9 +8,8 @@ import {Animated, TouchableWithoutFeedback, View, Platform} from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import {connect} from 'react-redux';
 import CrossFadeIcon from './CrossFadeIcon';
-import {BaseComponent, Constraints} from '../Utilities';
+import {BaseComponent, Constraints, I18n} from '../Utilities';
 import MyStyleSheet from '../Utilities/MyStyleSheet';
-import I18n from 'react-native-i18n';
 const majorVersion = parseInt(Platform.Version, 10);
 const isIos = Platform.OS === 'ios';
 const isIOS11 = majorVersion >= 11 && isIos;
@@ -34,7 +33,7 @@ class TabBarBottom extends BaseComponent {
             return null;
         }
         const themeColor = Constraints.Themes.get(theme);
-        const label = I18n.t(`navigator.${route.routeName}`, {locale: language});
+        const label = I18n.t('navigator', route.routeName, {locale: language});
         const tintColor = focused ? themeColor.primary.toHex() : themeColor.secondary.toHex();
         let styles = MyStyleSheet.get(theme);
         if (typeof label === 'string') {
@@ -109,7 +108,7 @@ class TabBarBottom extends BaseComponent {
                                         flex: 1,
                                         alignItems: isIos ? 'center' : 'stretch',
                                         height: tabBarHeight,
-                                        justifyContent:'center'
+                                        justifyContent: 'center'
                                     },
                                     {backgroundColor},
                                     tabStyle

@@ -14,6 +14,32 @@ class DeviceHelper {
             (height === 812 || width === 812)
         );
     }
+
+    static initSocket() {
+        let ws = new WebSocket('ws://localhost:8080', '', {
+            headers: {token: '111111'}
+        });
+
+        ws.onopen = () => {
+            // connection opened
+            ws.send('something'); // send a message
+        };
+
+        ws.onmessage = (e) => {
+            // a message was received
+            console.warn(e.data);
+        };
+
+        ws.onerror = (e) => {
+            // an error occurred
+            console.warn(e.message);
+        };
+
+        ws.onclose = (e) => {
+            // connection closed
+            console.warn(e.code, e.reason);
+        };
+    }
 }
 
 export default DeviceHelper;

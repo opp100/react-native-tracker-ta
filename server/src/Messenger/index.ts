@@ -1,14 +1,24 @@
 import * as _ from 'lodash';
 
 const INIT_CLIENT_ID = 'init_client_id';
+const GENERAL_MESSAGE = 'general_message';
 
 interface Message {
-    type: 'register' | 'init_client_id';
+    type: 'register' | 'general';
     message: string;
     client_id?: string;
+    target: number;
 }
 
 class Messenger {
+    static generalMessage(msg: string) {
+        const response = {
+            type: GENERAL_MESSAGE,
+            message: msg
+        };
+        return JSON.stringify(response);
+    }
+
     static responseId(id: string) {
         const response = {
             type: INIT_CLIENT_ID,

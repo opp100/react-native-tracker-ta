@@ -40,13 +40,16 @@ wss.on('connection', (ws: WebSocket) => {
         if (!msgObj) {
             return;
         }
-        
+
         if (msgObj.type == 'register') {
             let _id;
             _id = Messenger.register(msgObj.client_id);
-            console.warn(_id);
             lookup[_id] = ws;
             lookup[_id].send(Messenger.responseId(_id.toString()));
+        }
+        if (msgObj.type == 'general') {
+            let _id = msgObj.target;
+            lookup[_id].send(Messenger.generalMessage(msgObj.message));
         }
     });
 

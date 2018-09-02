@@ -9,10 +9,6 @@ import {Text, View, SafeAreaView, ScrollView} from 'react-native';
 import {MyStyleSheet, BaseComponent, SocketHelper} from '../../Utilities';
 import {connect} from 'react-redux';
 import {Button, FontAwesome, Badge} from '../../UIWidgets';
-import PopupActions from '../../Reducers/Popups';
-import BadgeActions from '../../Reducers/Badge';
-import SinglePicker from '../../UIWidgets/Popups/SinglePicker';
-import InputDialog from '../../UIWidgets/Popups/InputDialog';
 
 class Tracker extends BaseComponent {
     static navigationOptions = {
@@ -39,9 +35,18 @@ class Tracker extends BaseComponent {
     }
 
     initSocket() {
-        let sh = new SocketHelper();
+        this.sh = new SocketHelper();
         const {clientId} = this.props;
-        sh.init(clientId);
+        this.sh.init(clientId);
+    }
+
+    _onSendMessage() {
+        const data = {
+            target: 774936,
+            message: 'hello',
+            type: 'general'
+        };
+        this.sh.send(data);
     }
 
     render() {
@@ -53,6 +58,11 @@ class Tracker extends BaseComponent {
                 <SafeAreaView style={styles.container}>
                     <ScrollView>
                         <Text>Your Client Id: {clientId}</Text>
+                        <Button
+                            text="SendMessage"
+                            color={themeColor.info.toHex()}
+                            onPress={() => this._onSendMessage()}
+                        />
                     </ScrollView>
                 </SafeAreaView>
             </View>

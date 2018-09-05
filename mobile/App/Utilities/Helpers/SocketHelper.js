@@ -30,7 +30,6 @@ class SocketHelper {
 
         this.ws.onerror = (e) => {
             // an error occurred
-            console.warn(e.message);
             setTimeout(() => {
                 this.init();
             }, 1500);
@@ -39,7 +38,6 @@ class SocketHelper {
         this.ws.onclose = (e) => {
             // connection closed
             this.reconnect();
-            console.warn(e.code, e.reason);
         };
     }
 
@@ -53,7 +51,6 @@ class SocketHelper {
 
     reconnect() {
         this.reconnectInterval = setInterval(() => {
-            console.warn('reconnecting...');
             this.ws.removeEventListener();
             this.init();
         }, 5000);

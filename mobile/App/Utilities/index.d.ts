@@ -35,3 +35,11 @@ export interface IConstraints {
 }
 
 export declare const Constraints: IConstraints;
+
+export class SocketHelper {
+    init(clientId?: number): void;
+    register(clientId: number): void;
+    reconnect(): void;
+    send(msg: string): void;
+    processMsg(msg: string): void;
+}

@@ -5,71 +5,70 @@ import CacheStore from 'react-native-cache-store';
 
 const INIT_CLIENT_ID = 'init_client_id';
 const GENERAL_MESSAGE = 'general_message';
+const GEOLOCATION_MESSAGE = 'geolocation_message';
 
+let ws, reconnectInterval;
 class SocketHelper {
-    _connected = false;
-    reconnectInterval;
-    init(clientId = null) {
-        this.ws = new WebSocket('ws://192.168.0.114:8080', '', {
+    static init(clientId = null) {
+        ws = new WebSocket('ws://192.168.0.114:8080', '', {
             headers: {token: '111111'}
         });
 
-        this.ws.onopen = () => {
-            if (this.reconnectInterval) clearInterval(this.reconnectInterval);
+        ws.onopen = () => {
+            if (reconnectInterval) clearInterval(reconnectInterval);
             // send header
             store.dispatch(PopupActions.showHeaderMessage('Connect Success!', 1000, 'success'));
             // connection opened
-            this.register(clientId);
+            SocketHelper.register(clientId);
         };
 
-        this.ws.onmessage = (e) => {
+        ws.onmessage = (e) => {
             // a message was received
             // console.warn(e.data);
-            this.processMsg(e.data);
+            SocketHelper.processMsg(e.data);
         };
 
-        this.ws.onerror = (e) => {
+        ws.onerror = (e) => {
             // an error occurred
             setTimeout(() => {
-                this.init();
+                SocketHelper.init();
             }, 1500);
         };
 
-        this.ws.onclose = (e) => {
+        ws.onclose = (e) => {
             // connection closed
-            this.reconnect();
+            SocketHelper.reconnect();
         };
     }
 
-    register(clientId) {
+    static register(clientId) {
         if (!clientId) {
-            this.send({type: 'register'});
+            SocketHelper.send({type: 'register'});
             return;
         }
-        this.send({client_id: clientId, type: 'register'});
+        SocketHelper.send({client_id: clientId, type: 'register'});
     }
 
-    reconnect() {
-        this.reconnectInterval = setInterval(() => {
-            this.ws.removeEventListener();
-            this.init();
+    static reconnect() {
+        reconnectInterval = setInterval(() => {
+            ws.removeEventListener();
+            SocketHelper.init();
         }, 5000);
     }
 
-    send(msg) {
+    static send(msg) {
         if (typeof msg != 'string') {
             msg = JSON.stringify(msg);
         }
-        this.ws.send(msg); // send a message
+        ws.send(msg); // send a message
     }
 
-    processMsg(msg) {
+    static processMsg(msg) {
         let _obj = {};
         console.warn(msg);
         try {
             _obj = JSON.parse(msg);
         } catch (e) {
-            // TODO: show message
             console.warn(msg);
             return;
         }
@@ -83,6 +82,10 @@ class SocketHelper {
         if (_obj['type'] == GENERAL_MESSAGE && _obj['message']) {
             alert(_obj['message']);
             return;
+        }
+
+        if (_obj['type'] == GEOLOCATION_MESSAGE && _obj['coords']) {
+            store.dispatch(SocketActions.showMessage(_obj));
         }
     }
 }

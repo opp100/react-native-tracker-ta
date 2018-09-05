@@ -6,7 +6,7 @@
 
 import React from 'react';
 import {Text, View, SafeAreaView, ScrollView} from 'react-native';
-import {MyStyleSheet, BaseComponent, SocketHelper} from '../../Utilities';
+import {MyStyleSheet, BaseComponent, SocketHelper, BackgroundGeolocationHelper} from '../../Utilities';
 import {connect} from 'react-redux';
 import {Button, FontAwesome, Badge} from '../../UIWidgets';
 
@@ -32,12 +32,22 @@ class Tracker extends BaseComponent {
     async componentDidMount() {
         super.componentDidMount();
         this.initSocket();
+        this.initBackgroundTracking();
+    }
+
+    initBackgroundTracking() {
+        this.bgh = new BackgroundGeolocationHelper();
+        this.bgh.init();
+    }
+
+    componentWillUnmount() {
+        super.componentWillUnmount();
+        this.bgh.clear();
     }
 
     initSocket() {
-        this.sh = new SocketHelper();
         const {clientId} = this.props;
-        this.sh.init(clientId);
+        SocketHelper.init(clientId);
     }
 
     _onSendMessage() {
@@ -46,23 +56,34 @@ class Tracker extends BaseComponent {
             message: 'hello',
             type: 'general'
         };
-        this.sh.send(data);
+        SocketHelper.send(data);
     }
 
     render() {
-        const {language, theme, clientId} = this.props;
+        const {language, theme, clientId, socketMessage} = this.props;
         const styles = MyStyleSheet.get(theme);
         const themeColor = MyStyleSheet.getThemeColor(theme);
+
+        const CoordsLabel = () => {
+            if (socketMessage && socketMessage.coords) {
+                let lng = socketMessage.coords.longitude;
+                let lat = socketMessage.coords.latitude;
+                return <Text>{`${lat}, ${lng}`}</Text>;
+            }
+            return null;
+        };
+
         return (
             <View style={styles.flexBox}>
                 <SafeAreaView style={styles.container}>
                     <ScrollView>
-                        <Text>Your Client Id: {clientId}</Text>
+                        <Text>Your Client ID: {clientId}</Text>
                         <Button
                             text="SendMessage"
                             color={themeColor.info.toHex()}
                             onPress={() => this._onSendMessage()}
                         />
+                        <CoordsLabel />
                     </ScrollView>
                 </SafeAreaView>
             </View>
@@ -74,7 +95,8 @@ const mapStateToProps = (state) => {
     return {
         language: state.settings.language,
         theme: state.settings.theme,
-        clientId: state.socket.clientId
+        clientId: state.socket.clientId,
+        socketMessage: state.socket.message
     };
 };
 

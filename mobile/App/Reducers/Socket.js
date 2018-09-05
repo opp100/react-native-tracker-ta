@@ -8,7 +8,8 @@ import {createReducer, createActions} from 'reduxsauce';
 import Immutable from 'seamless-immutable';
 
 const {Types, Creators} = createActions({
-    storeClientId: ['clientId']
+    storeClientId: ['clientId'],
+    showMessage: ['message']
 });
 
 export const SettingsTypes = Types;
@@ -23,6 +24,11 @@ export const storeClientId = (state, {clientId}) => {
     return state.merge({clientId});
 };
 
+export const showMessage = (state, {message}) => {
+    return state.merge({message});
+};
+
 export const reducer = createReducer(INITIAL_STATE, {
-    [Types.STORE_CLIENT_ID]: storeClientId
+    [Types.STORE_CLIENT_ID]: storeClientId,
+    [Types.SHOW_MESSAGE]: showMessage
 });

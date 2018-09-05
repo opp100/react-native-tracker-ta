@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>App requires background tracking</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>fa-brands-400.ttf</string>
@@ -55,5 +55,15 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>App requires background tracking</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App requires background tracking</string>
+	<key>NSMotionUsageDescription</key>
+	<string>App requires motion tracking</string>
 </dict>
 </plist>

@@ -10,6 +10,7 @@ import Constraints from './Constraints';
 import I18n from './Helpers/I18nHelper';
 import DeviceHelper from './Helpers/DeviceHelper';
 import SocketHelper from './Helpers/SocketHelper';
+import BackgroundGeolocationHelper from './Helpers/BackgroundGeolocationHelper';
 
 module.exports = {
     MyStyleSheet: MyStyleSheet,
@@ -17,5 +18,6 @@ module.exports = {
     BaseComponent: BaseComponent,
     I18n: I18n,
     DeviceHelper: DeviceHelper,
-    SocketHelper: SocketHelper
+    SocketHelper: SocketHelper,
+    BackgroundGeolocationHelper: BackgroundGeolocationHelper
 };

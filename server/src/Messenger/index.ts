@@ -3,12 +3,26 @@ import * as WebSocket from 'ws';
 
 const INIT_CLIENT_ID = 'init_client_id';
 const GENERAL_MESSAGE = 'general_message';
+const GEOLOCATION_MESSAGE = 'geolocation_message';
+
+declare class Coords {
+    speed: number;
+    heading: number;
+    longitude: number;
+    bearing: number;
+    time: number;
+    latitude: number;
+    altitude: number;
+    accuracy: number;
+    altitudeAccuracy: number;
+}
 
 interface Message {
-    type: 'register' | 'general';
+    type: 'register' | 'general' | 'geolocation';
     message: string;
-    client_id?: string;
+    client_id: string;
     target: number;
+    coords: Coords;
 }
 
 class Messenger {
@@ -24,24 +38,38 @@ class Messenger {
         if (!msgObj) {
             return;
         }
-
-        if (msgObj.type == 'register') {
-            let _id;
-            _id = this.register(msgObj.client_id);
-            this.lookup[_id] = this.ws;
-            this.lookup[_id].send(this.responseId(_id.toString()));
-        }
-        if (msgObj.type == 'general') {
-            let _id = msgObj.target;
-            this.lookup[_id].send(this.generalMessage(msgObj.message));
+        let _id;
+        switch (msgObj.type) {
+            case 'register':
+                _id = this.register(msgObj.client_id);
+                this.lookup[_id] = this.ws;
+                this.sendToTarget(_id, this.responseId(_id.toString()));
+                break;
+            case 'geolocation':
+                _id = msgObj.target;
+                this.sendToTarget(_id, this.geolocationMessage(msgObj.coords));
+                break;
+            case 'general':
+            default:
+                _id = msgObj.target;
+                this.sendToTarget(_id, this.generalMessage(msgObj.message));
         }
     }
+
+    sendToTarget(id: number, message: object | string) {
+        if (!this.lookup[id]) return;
+        if (typeof message == 'object') {
+            message = JSON.stringify(message);
+        }
+        return this.lookup[id].send(message);
+    }
+
     generalMessage(msg: string) {
         const response = {
             type: GENERAL_MESSAGE,
             message: msg
         };
-        return JSON.stringify(response);
+        return response;
     }
 
     responseId(id: string) {
@@ -50,7 +78,15 @@ class Messenger {
             message: `Your id ${id}`,
             client_id: id
         };
-        return JSON.stringify(response);
+        return response;
+    }
+
+    geolocationMessage(coords: Coords) {
+        const response = {
+            type: GEOLOCATION_MESSAGE,
+            coords: coords
+        };
+        return response;
     }
 
     register(id?: string): number {

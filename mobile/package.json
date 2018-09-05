@@ -16,6 +16,7 @@
     "react-native": "0.56.0",
     "react-native-cache-store": "^1.0.2",
     "react-native-i18n": "^2.0.15",
+    "react-native-mauron85-background-geolocation": "^0.5.0-alpha.40",
     "react-native-spinkit": "^1.1.1",
     "react-native-svg": "^6.5.2",
     "react-navigation": "^2.12.1",

@@ -32,6 +32,7 @@ export class BaseComponent<P = {}, S = {}, SS = any> extends React.Component<P, 
 
 export interface IConstraints {
     Themes?: _Constraints.ITheme;
+    StorageKeys?: _Constraints.IStorageKeys;
 }
 
 export declare const Constraints: IConstraints;

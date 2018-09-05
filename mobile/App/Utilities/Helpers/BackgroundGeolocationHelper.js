@@ -6,6 +6,8 @@
 import BackgroundGeolocation from 'react-native-mauron85-background-geolocation';
 import {Alert} from 'react-native';
 import SocketHelper from './SocketHelper';
+import CacheStore from 'react-native-cache-store';
+import Constraints from '../Constraints';
 
 class BackgroundGeolocationHelper {
     init() {
@@ -23,9 +25,11 @@ class BackgroundGeolocationHelper {
         });
 
         BackgroundGeolocation.on('location', (location) => {
-            BackgroundGeolocation.startTask((taskKey) => {
+            BackgroundGeolocation.startTask(async (taskKey) => {
+                const _targetClientId = await CacheStore.get(Constraints.StorageKeys.TARGET_CLIENT_ID);
+
                 const data = {
-                    target: 481864,
+                    target: _targetClientId,
                     coords: location,
                     type: 'geolocation'
                 };

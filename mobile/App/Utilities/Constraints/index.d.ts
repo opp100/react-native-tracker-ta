@@ -26,3 +26,8 @@ export interface ITheme {
     get?(theme: String): IColors;
 }
 export declare const Themes: ITheme;
+
+export interface IStorageKeys {
+    TARGET_CLIENT_ID?(): string;
+}
+export declare const StorageKeys: IStorageKeys;

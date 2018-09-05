@@ -5,6 +5,7 @@
  */
 import AppConfig from './AppConfig';
 import Themes from './Themes';
+import StorageKeys from './StorageKeys';
 
 export default class Constraints {
     static get Themes() {
@@ -12,5 +13,8 @@ export default class Constraints {
     }
     static get AppConfig() {
         return AppConfig;
+    }
+    static get StorageKeys() {
+        return StorageKeys;
     }
 }

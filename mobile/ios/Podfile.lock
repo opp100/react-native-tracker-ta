@@ -1,6 +1,10 @@
 PODS:
+  - DoubleConversion (1.1.5)
+  - glog (0.3.4)
   - React (0.56.0):
     - React/Core (= 0.56.0)
+  - react-native-maps (0.21.0):
+    - React
   - react-native-spinkit (1.0.2):
     - React
   - React/Core (0.56.0):
@@ -41,6 +45,9 @@ PODS:
   - yoga (0.56.0.React)
 
 DEPENDENCIES:
+  - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
+  - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-spinkit (from `../node_modules/react-native-spinkit`)
   - React/Core (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -59,8 +66,14 @@ DEPENDENCIES:
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
 EXTERNAL SOURCES:
+  DoubleConversion:
+    :podspec: ../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec
+  glog:
+    :podspec: ../node_modules/react-native/third-party-podspecs/glog.podspec
   React:
     :path: ../node_modules/react-native
+  react-native-maps:
+    :path: ../node_modules/react-native-maps
   react-native-spinkit:
     :path: ../node_modules/react-native-spinkit
   RNI18n:
@@ -71,12 +84,15 @@ EXTERNAL SOURCES:
     :path: ../node_modules/react-native/ReactCommon/yoga/yoga.podspec
 
 SPEC CHECKSUMS:
+  DoubleConversion: a9706f16e388b53ff12cca34473428ee29746a26
+  glog: b3b0330915eccea41c5cc9731a77cf564a9be5ea
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-maps: 066c2afcc89e18726377bcc685315f989ca22449
   react-native-spinkit: c9f5826e1a0bf0da889b3795278eb96ae15c1350
   RNI18n: 46b8694063fbd699f2c06a4dc8e835b3176763b1
   RNSVG: 6252323c0312735f0af5f58b5adf2965b6a9ffbf
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: b9c068e98ef3d7e9c1c3ed5aab598de227f9e88c
+PODFILE CHECKSUM: 25029ca14a8b0056422fbeb12f9a73850f930b4e
 
 COCOAPODS: 1.4.0

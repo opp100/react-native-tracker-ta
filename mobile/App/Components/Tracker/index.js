@@ -10,6 +10,7 @@ import {MyStyleSheet, BaseComponent, SocketHelper, BackgroundGeolocationHelper, 
 import {connect} from 'react-redux';
 import {Button, FontAwesome, Badge} from '../../UIWidgets';
 import CacheStore from 'react-native-cache-store';
+import TrackerMapView from './TrackerMapView';
 
 class Tracker extends BaseComponent {
     static navigationOptions = {
@@ -83,7 +84,7 @@ class Tracker extends BaseComponent {
                 let lng = socketMessage.coords.longitude;
                 let lat = socketMessage.coords.latitude;
 
-                return <Text>{`${lat}, ${lng}`}</Text>;
+                return <TrackerMapView lng={lng} lat={lat} />;
             }
             return null;
         };
@@ -107,7 +108,7 @@ class Tracker extends BaseComponent {
                             color={themeColor.info.toHex()}
                             onPress={() => this._onSendMessage()}
                         />
-                        <CoordsLabel />
+                        {CoordsLabel()}
                     </ScrollView>
                 </SafeAreaView>
             </View>

@@ -6,6 +6,8 @@ platform :ios, '9.0'
 
 target 'ReactNaitveTrackerTa' do
 rn_path = '../node_modules/react-native'
+rn_maps_path = '../node_modules/react-native-maps'
+
 pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga/yoga.podspec'
 pod 'React', path: rn_path, subspecs: [
     'Core',
@@ -22,9 +24,13 @@ pod 'React', path: rn_path, subspecs: [
     'DevSupport',
 ]
 
+pod 'DoubleConversion', :podspec => "#{rn_path}/third-party-podspecs/DoubleConversion.podspec"
+pod 'glog', :podspec => "#{rn_path}/third-party-podspecs/glog.podspec"
+
 pod 'RNI18n', :path => '../node_modules/react-native-i18n'
 pod 'react-native-spinkit', :path => '../node_modules/react-native-spinkit'
 pod 'RNSVG', :path => '../node_modules/react-native-svg'
+pod 'react-native-maps', path: rn_maps_path
 
 end
 
